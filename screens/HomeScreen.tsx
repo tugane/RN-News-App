@@ -1,42 +1,26 @@
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
 import React from "react";
 import Spacing from "../constants/Spacing";
-import Colors from "../constants/Colors";
-import FontSize from "../constants/FontSize";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackType } from "../types";
+import Header from "../components/Header";
+import Search from "../components/Search";
+import HotNews from "../components/HotNews";
+import Popular from "../components/Popular";
 
-const HomeScreen: React.FC = () => {
-  const { navigate } =
-    useNavigation<NativeStackNavigationProp<RootStackType>>();
-
+const HomeScreen = () => {
   return (
     <SafeAreaView>
-      <Text style={{ margin: Spacing.margin.lg, fontSize: FontSize.lg }}>
-        HomeScreen
-      </Text>
-      <TouchableOpacity
-        onPress={() => navigate("Details", { news: {} })}
+      <ScrollView
         style={{
           padding: Spacing.padding.base,
-          backgroundColor: Colors.primary,
-          margin: Spacing.margin.lg,
-          borderRadius: Spacing.borderRadius.base,
         }}
       >
-        <Text
-          style={{
-            color: Colors.onPrimary,
-          }}
-        >
-          Details
-        </Text>
-      </TouchableOpacity>
+        <Header />
+        <Search />
+        <HotNews />
+        <Popular />
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({});
