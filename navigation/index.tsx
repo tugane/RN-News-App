@@ -4,36 +4,26 @@
  *
  */
 
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import Colors from "../constants/Colors";
 import DetailScreen from "../screens/DetailScreen";
 import NewsScreen from "../screens/NewsScreen";
 import HomeScreen from "../screens/HomeScreen";
+
 import {
   HomeNavigatorType,
   NewsNavigatorType,
   RootStackType,
   TabNavigatorType,
 } from "../types";
-import {
-  FontAwesome5,
-  Ionicons,
-  MaterialIcons,
-  Octicons,
-} from "@expo/vector-icons";
 import SettingsScreen from "../screens/SettingsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { FontAwesome5, Ionicons, Octicons } from "@expo/vector-icons";
 import Spacing from "../constants/Spacing";
-
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    ...Colors,
-  },
-};
+import { theme } from "../constants/Colors";
+import useColors from "../hooks/useColors";
+import { View } from "react-native";
 
 export default function Navigation() {
   return (
@@ -65,6 +55,7 @@ function RootNavigator() {
 const Tab = createBottomTabNavigator<TabNavigatorType>();
 
 function TabNavigator() {
+  const colors = useColors();
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -76,7 +67,7 @@ function TabNavigator() {
                 <Octicons
                   name='home'
                   size={size}
-                  color={focused ? Colors.onPrimary : Colors.textGray}
+                  color={focused ? colors.onPrimary : colors.textGray}
                 />
               );
             case "NewsNavigator":
@@ -84,7 +75,7 @@ function TabNavigator() {
                 <FontAwesome5
                   name='list-alt'
                   size={size}
-                  color={focused ? Colors.onPrimary : Colors.textGray}
+                  color={focused ? colors.onPrimary : colors.textGray}
                 />
               );
             case "SettingsScreen":
@@ -92,13 +83,13 @@ function TabNavigator() {
                 <Ionicons
                   name='settings-outline'
                   size={size}
-                  color={focused ? Colors.onPrimary : Colors.textGray}
+                  color={focused ? colors.onPrimary : colors.textGray}
                 />
               );
           }
         },
         tabBarStyle: {
-          backgroundColor: Colors.primary,
+          backgroundColor: colors.primary,
           marginBottom: Spacing.margin.xl,
           paddingBottom: 0,
           marginHorizontal: Spacing.margin.xl,
