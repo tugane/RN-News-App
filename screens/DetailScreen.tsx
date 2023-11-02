@@ -1,29 +1,40 @@
-import { SafeAreaView, Text, TouchableOpacity } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 import FontSize from "../constants/FontSize";
 import Spacing from "../constants/Spacing";
 import { Ionicons } from "@expo/vector-icons";
-import Colors from "../constants/Colors";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackType } from "../types";
+import useColors from "../hooks/useColors";
+import { Categories } from "../data";
+import Font from "../constants/Font";
+import NewsHeader from "../components/NewsHeader";
+import NewContent from "../components/NewContent";
 
 type Props = NativeStackScreenProps<RootStackType, "Details">;
 
-const DetailScreen: React.FC<Props> = ({ navigation: { goBack } }) => {
+const DetailScreen: React.FC<Props> = ({
+  navigation: { goBack },
+  route: {
+    params: { news },
+  },
+}) => {
   return (
     <SafeAreaView>
-      <TouchableOpacity
-        onPress={() => goBack()}
+      <NewsHeader categoryId={news.categoryId} />
+      <ScrollView
         style={{
           padding: Spacing.padding.base,
         }}
       >
-        <Ionicons name='chevron-back' color={Colors.text} size={FontSize.lg} />
-      </TouchableOpacity>
-
-      <Text style={{ margin: Spacing.margin.lg, fontSize: FontSize.lg }}>
-        DetailScreen
-      </Text>
+        <NewContent news={news} />
+      </ScrollView>
     </SafeAreaView>
   );
 };
