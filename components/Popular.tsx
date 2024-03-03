@@ -44,8 +44,8 @@ const Popular: React.FC = () => {
         style={{
           paddingVertical: Spacing.padding.base,
         }}
-      >
-        <HorizontalNewsList />
+          >
+              <HorizontalNewsList />
       </View>
     </View>
   );
