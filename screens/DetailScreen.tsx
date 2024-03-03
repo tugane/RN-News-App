@@ -1,6 +1,8 @@
+
 import {SafeAreaView, ScrollView, View,Text, Image} from "react-native";
 import React from "react";
 import Spacing from "../constants/Spacing";
+
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {RootStackType} from "../types";
 import NewsHeader from "../components/NewsHeader";
